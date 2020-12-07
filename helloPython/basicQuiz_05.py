@@ -9,14 +9,26 @@
 
 from random import *
 
-passenger = [randint(5,50) for i in range(1,51)]
-count = 0
+# passenger = [randint(5,50) for i in range(1,51)]
+# count = 0
 
-for i in range(0,50):
+# for i in range(0,50):
+#     if 5 <= passenger[i] & passenger[i] <= 15:
+#         print("[O] {0}번째 손님 (소요시간 : {1}분)".format(str(i+1),passenger[i]))
+#         count += 1
+#     else:
+#         print("[ ] {0}번째 손님 (소요시간 : {1}분)".format(str(i+1),passenger[i]))
+
+# print("총 탑승 승객 : {0} 분".format(count))
+
+passenger = [randint(5,50) for i in range(0,50)]
+cnt = 0
+
+for i in range(50):
     if 5 <= passenger[i] & passenger[i] <= 15:
-        print("[O] {0}번째 손님 (소요시간 : {1}분)".format(str(i+1),passenger[i]))
-        count += 1
+        print("[O] {0}번째 손님 (소요시간 : {1}분)".format((i+1), passenger[i]))
+        cnt += 1
     else:
-        print("[ ] {0}번째 손님 (소요시간 : {1}분)".format(str(i+1),passenger[i]))
+        print("[ ] {0}번째 손님 (소요시간 : {1}분)".format((i+1), passenger[i]))
 
-print("총 탑승 승객 : {0} 분".format(count))
+print("총 탑승 승객 : {0} 분".format(cnt))

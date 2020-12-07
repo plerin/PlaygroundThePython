@@ -284,15 +284,189 @@ from random import *
 
 
 ##. 지역변수와 전역변수
-gun = 10
-def checkpoint(soldiers):
-    global gun  # 전역공간의 gun을 사용하겠다.
-    gun = gun - soldiers
+# gun = 10
+# def checkpoint(soldiers):
+#     global gun  # 전역공간의 gun을 사용하겠다.
+#     gun = gun - soldiers
 
-def chcekpoint_ret(gun, soldiers):
-    gun = gun - soldiers
-    return gun
+# def chcekpoint_ret(gun, soldiers):
+#     gun = gun - soldiers
+#     return gun
 
-gun = chcekpoint_ret(gun, 2)
-print("남은 총 {0}".format(gun))
+# gun = chcekpoint_ret(gun, 2)
+# print("남은 총 {0}".format(gun))
 
+##. 표준입출력
+# import sys
+# print("Python", "Java" , "Javascript", sep=",", end="?") 
+# print("Python", "Java" , "Javascript", file=sys.stdout) 
+# print("P:ython", "Java" , "Javascript", file=sys.stderr) 
+# print("무엇이 더 재미있을까요?")
+
+# 시험 성적, ljust, rjust
+# scores = {"수학":0, "영어":50, "코딩":100}
+# for subject, score in scores.items():
+#     # print(subject, score)
+#     print(subject.ljust(8), str(score).rjust(4), sep=":")
+
+# 은행 대기순서표
+# 001, 002, 003, ...
+# for num in range(1,21):
+#     print("대기번호 : " + str(num).zfill(3))        #. 3크기만큼 채우기 빈 칸은 0으로 채워
+
+# answer = input("아무 값이나 입력하세요 : ")     #. 항상 문자열로만 받아와
+# print("입력하신 값은 " + answer + "입니다")
+
+
+##. 다양한 형태의 포맷
+# print("{0: >10}".format(500))
+
+# #. 양수일 땐 +, 음수일 땐 -로 표시
+# print("{0: >+10}".format(500))
+# print("{0: >+10}".format(-500))
+
+# #. 왼쪽정렬, 빈칸을 _로 채움
+# print("{0:_<+10}".format(500))
+
+# #. 3자리마다 콤마를 찍어주기
+# print("{0:,}".format(1000000000000))
+
+# #. 3자리마다 콤마를 찍어주기
+# print("{0:+,}".format(-1000000000000))
+
+# #. 3자리 마다 콤마를 찍어주기, 부호도 붙이고, 자릿수 확보하기, 빈자리는 ^로 채워주기
+# print("{0:^<+30,}".format(1000000000000))
+
+# #. 소수점 출력
+# print("{0:f}".format(5/3))
+
+# #. 소수점 특정 자리수 까지만 표시
+# print("{0:.2f}".format(5/3))
+
+
+##. 파일 입출력
+# score_file = open("score.txt", "w", encoding="utf8")
+# print("수학 : 0", file=score_file)
+# print("영어 : 50", file=score_file)
+# score_file.close()
+
+# score_file = open("score.txt", "a", encoding="utf8")
+# score_file.write("과학 : 80")
+# score_file.write("\n코딩 : 100")
+# score_file.close()
+
+# score_file = open("score.txt", "r", encoding="utf8")
+# print(score_file.read())
+# score_file.close()
+
+# score_file = open("score.txt", "r", encoding="utf8")
+# for i in range(0,4):
+#     print(score_file.readline(), end="") # 줄 별로 읽기 동작 수행, 한 줄읽고 커서는 다음 줄로 이동
+
+# score_file = open("score.txt", "r", encoding="utf8")
+# while True:
+#     line = score_file.readline()
+#     if not line:
+#         break
+#     print(line, end="")
+# score_file.close()
+
+# score_file = open("score.txt", "r", encoding="utf8")
+# lines = score_file.readlines()
+
+# for line in lines:
+#     print(line, end="")
+
+# score_file.close()
+
+
+##. pickle -> 데이터를 pickle로 저장하고 이를 통해 load 해서 사용할 수 있도록 
+import pickle
+# profile_file = open("profile.pickle", "wb")
+# profile = {"이름": "박명수", "나이":30, "취미":["축구","골프","야구"]}
+# print(profile)
+
+# pickle.dump(profile, profile_file)  # profile의 정보를 file에 저장
+
+# profile_file.close()
+
+# profile_file = open("profile.pickle", "rb") 
+# profile = pickle.load(profile_file) # file에 있는 정보를 profile 에 불러오기
+# print(profile)
+
+# profile_file.close()
+
+
+##. with 따로 닫아줄 필요 없다(close) 
+
+# with open("profile.pickle", "rb") as profile_file:
+#     print(pickle.load(profile_file))
+
+# with open("study.txt", "w", encoding="utf8") as study_file:
+#     study_file.write("파이썬을 열심히 공부하고있어요")
+
+# with open("study.txt" , "r", encoding="utf8")
+
+
+##. 클래스
+
+# # 마린 : 공격 유닛, 군인, 총을 쏠 수 있음
+# name = "마린"
+# hp = 40
+# damage = 5
+
+# print("{} 유닛이 생성되었습니다.".format(name))
+# print("체력 {0}, 공격력{1}\n".format(hp,damage))
+
+# # 탱크 : 공격 유닛, 탱크. 포를 쏠 수 있으며 일반모드 / 시즈모드
+# tank_name = "탱크"
+# tank_hp = 150
+# tank_damage = 35
+
+# print("{} 유닛이 생성되었습니다.".format(tank_name))
+# print("체력 {0}, 공격력{1}\n".format(tank_hp,tank_damage))
+
+# def attack(name, location, damage):
+#     print("{0} : {1} 방향으로 적군을 공격 합니다. [공격력 {2}]".format(name, location, damage))
+
+# attack(name, "1시", damage)
+# attack(tank_name, "1시", tank_damage)
+
+class Unit:
+    def __init__(self, name, hp):       # 생성자
+        self.name = name
+        self.hp = hp
+
+# marine1 = Unit("마린",40, 5)    # marine1 = instance
+# marine2 = Unit("마린",40, 5)
+# tank = Unit("탱크", 150, 35)
+
+# wraith1 = Unit("레이스", 80, 5)
+
+# wraith2 = Unit("빼앗긴 레이스", 80, 5)
+# wraith2.clocking = True     # 클래스 외부에서 메소드 확장할 수 있고 기존 클래스로 만든 인스턴스에는 적용이 안된다.
+
+# if wraith2.clocking == True:
+#     print("{0}는 현재 클로킹 상태입니다.".format(wraith2.name))
+
+
+class AttackUnit(Unit):
+    def __init__(self, name, hp, damage):       # 생성자
+        Unit.__init__(self,name,hp)
+        self.damage = damage
+
+    def attack(self, location):
+        print("{0} : {1} 방향으로 적군을 공격 합니다. [공격력 {2}]".format(self.name, location, self.damage))
+
+    def damaged(self, damage):
+        print("{0} : {1} 데미지를 입었습니다.".format(self.name, damage))
+        self.hp -= damage
+        print("{0} : 현재 체력은 {1} 입니다.".format(self.name, self.hp))
+        if self.hp <= 0:
+            print("{0} : 파괴되었습니다.".format(self.name))
+
+firebat1 = AttackUnit("파이어뱃",50,16)
+firebat1.attack("5시")
+
+firebat1.damaged(25)
+firebat1.damaged(25)
