@@ -449,143 +449,250 @@ import pickle
 # if wraith2.clocking == True:
 #     print("{0}는 현재 클로킹 상태입니다.".format(wraith2.name))
 
-from random import *
+# from random import *
 
-class Unit:
-    def __init__(self, name, hp, speed):       # 생성자
-        self.name = name
-        self.hp = hp
-        self.speed = speed
-        print("{0} 유닛이 생성되었습니다.".format(name))
+# class Unit:
+#     def __init__(self, name, hp, speed):       # 생성자
+#         self.name = name
+#         self.hp = hp
+#         self.speed = speed
+#         print("{0} 유닛이 생성되었습니다.".format(name))
 
-    def move(self, location):
-        print("[지상 유닛 이동]")
-        print("{0} : {1} 방향으로 이동합니다. [속도 {2}]".format(self.name,location, self.speed))
+#     def move(self, location):
+#         print("[지상 유닛 이동]")
+#         print("{0} : {1} 방향으로 이동합니다. [속도 {2}]".format(self.name,location, self.speed))
 
-    def damaged(self, damage):
-        print("{0} : {1} 데미지를 입었습니다.".format(self.name, damage))
-        self.hp -= damage
-        print("{0} : 현재 체력은 {1} 입니다.".format(self.name, self.hp))
-        if self.hp <= 0:
-            print("{0} : 파괴되었습니다.".format(self.name))    
+#     def damaged(self, damage):
+#         print("{0} : {1} 데미지를 입었습니다.".format(self.name, damage))
+#         self.hp -= damage
+#         print("{0} : 현재 체력은 {1} 입니다.".format(self.name, self.hp))
+#         if self.hp <= 0:
+#             print("{0} : 파괴되었습니다.".format(self.name))    
 
-class AttackUnit(Unit):
-    def __init__(self, name, hp, speed, damage):       # 생성자
-        Unit.__init__(self,name,hp,speed)
-        self.damage = damage
+# class AttackUnit(Unit):
+#     def __init__(self, name, hp, speed, damage):       # 생성자
+#         Unit.__init__(self,name,hp,speed)
+#         self.damage = damage
 
-    def attack(self, location):
-        print("{0} : {1} 방향으로 적군을 공격 합니다. [공격력 {2}]".format(self.name, location, self.damage))
+#     def attack(self, location):
+#         print("{0} : {1} 방향으로 적군을 공격 합니다. [공격력 {2}]".format(self.name, location, self.damage))
 
-class Marine(AttackUnit):
-    def __init__(self):
-        AttackUnit.__init__(self, "마린", 40, 1, 5)
+# class Marine(AttackUnit):
+#     def __init__(self):
+#         AttackUnit.__init__(self, "마린", 40, 1, 5)
     
-    def stimpack(self):
-        if self.hp > 10:
-            self.hp -= 10
-            print("{0} : 스팀팩을 사용합니다. (HP 10 감소)".format(self.name))
-        else:
-            print("{0} : 체력이 부족하여 스팀팩을 사용하지 않았습니다.".format(self.name))
+#     def stimpack(self):
+#         if self.hp > 10:
+#             self.hp -= 10
+#             print("{0} : 스팀팩을 사용합니다. (HP 10 감소)".format(self.name))
+#         else:
+#             print("{0} : 체력이 부족하여 스팀팩을 사용하지 않았습니다.".format(self.name))
 
-class Tank(AttackUnit):
-    seize_develped = False
+# class Tank(AttackUnit):
+#     seize_develped = False
 
-    def __init__(self):
-        AttackUnit.__init__(self, "탱크", 150, 1, 35)
-        self.seize_mode = False
+#     def __init__(self):
+#         AttackUnit.__init__(self, "탱크", 150, 1, 35)
+#         self.seize_mode = False
 
-    def set_seize_mode(self):
-        if Tank.seize_develped == False:
-            return
+#     def set_seize_mode(self):
+#         if Tank.seize_develped == False:
+#             return
         
-        if self.seize_mode == False:
-            print("{0} : 시즈모드로 전환합니다.".format(self.name))
-            self.damage *= 2
-            self.seize_mode = True
-        else:
-            print("{0} : 시즈모드로 해제합니다.".format(self.name))
-            self.damage /= 2
-            self.seize_mode = False
+#         if self.seize_mode == False:
+#             print("{0} : 시즈모드로 전환합니다.".format(self.name))
+#             self.damage *= 2
+#             self.seize_mode = True
+#         else:
+#             print("{0} : 시즈모드로 해제합니다.".format(self.name))
+#             self.damage /= 2
+#             self.seize_mode = False
 
-class Flyable:
-    def __init__(self, flying_speed):
-        self.flying_speed = flying_speed
+# class Flyable:
+#     def __init__(self, flying_speed):
+#         self.flying_speed = flying_speed
 
-    def fly(self, name, location):
-        print("{0} : {1} 방향으로 날아갑니다. [속도 {2}]".format(name, location, self.flying_speed))
+#     def fly(self, name, location):
+#         print("{0} : {1} 방향으로 날아갑니다. [속도 {2}]".format(name, location, self.flying_speed))
 
-class FlyableAttackUnit(AttackUnit, Flyable):
-    def __init__(self, name, hp, damage, flying_speed):
-        AttackUnit.__init__(self, name, hp, 0, damage)
-        Flyable.__init__(self, flying_speed)
+# class FlyableAttackUnit(AttackUnit, Flyable):
+#     def __init__(self, name, hp, damage, flying_speed):
+#         AttackUnit.__init__(self, name, hp, 0, damage)
+#         Flyable.__init__(self, flying_speed)
 
-    def move(self, location):
-        print("[공중 유닛 이동]")
-        self.fly(self.name, location)
+#     def move(self, location):
+#         print("[공중 유닛 이동]")
+#         self.fly(self.name, location)
 
-class Wraith(FlyableAttackUnit):
-    def __init__(self):
-        FlyableAttackUnit.__init__(self, "레이스", 80, 20, 5)
-        self.clocked = False
+# class Wraith(FlyableAttackUnit):
+#     def __init__(self):
+#         FlyableAttackUnit.__init__(self, "레이스", 80, 20, 5)
+#         self.clocked = False
 
-    def clocking(self):
-        if self.clocked == True:
-            print("{0} : 클로킹 모드 해제합니다.".format(self.name))
-            self.clocked = False
-        else:
-            print("{0} : 클로킹 모드 설정합니다.".format(self.name))
-            self.clocked = True
+#     def clocking(self):
+#         if self.clocked == True:
+#             print("{0} : 클로킹 모드 해제합니다.".format(self.name))
+#             self.clocked = False
+#         else:
+#             print("{0} : 클로킹 모드 설정합니다.".format(self.name))
+#             self.clocked = True
 
-def game_start():
-    print("[알림] 새로운 게임을 시작합니다.")
+# def game_start():
+#     print("[알림] 새로운 게임을 시작합니다.")
 
-def game_over():
-    print("Player : gg")
-    print("[Player] 님이 게임에서 퇴장하셨습니다.")
+# def game_over():
+#     print("Player : gg")
+#     print("[Player] 님이 게임에서 퇴장하셨습니다.")
 
-# 실제 게임 진행
-game_start()
+# # 실제 게임 진행
+# game_start()
 
-m1 = Marine()
-m2 = Marine()
-m3 = Marine()
+# m1 = Marine()
+# m2 = Marine()
+# m3 = Marine()
 
-t1 = Tank()
-t2 = Tank()
+# t1 = Tank()
+# t2 = Tank()
 
-w1 = Wraith()
+# w1 = Wraith()
 
-# 유닛 일괄 관리
-attack_units = []
-attack_units.append(m1)
-attack_units.append(m2)
-attack_units.append(m3)
-attack_units.append(t1)
-attack_units.append(t2)
-attack_units.append(w1)
+# # 유닛 일괄 관리
+# attack_units = []
+# attack_units.append(m1)
+# attack_units.append(m2)
+# attack_units.append(m3)
+# attack_units.append(t1)
+# attack_units.append(t2)
+# attack_units.append(w1)
 
-# 전군 이동
-for unit in attack_units:
-    unit.move("1시")
+# # 전군 이동
+# for unit in attack_units:
+#     unit.move("1시")
 
-Tank.seize_develped = True
-print("[알림] 탱크 시즈모드 개발이 완료되었습니다.")
+# Tank.seize_develped = True
+# print("[알림] 탱크 시즈모드 개발이 완료되었습니다.")
 
-for unit in attack_units:
-    if isinstance(unit, Marine):
-        unit.stimpack()
-    elif isinstance(unit, Tank):
-        unit.set_seize_mode()
-    elif isinstance(unit, Wraith):
-        unit.clocking()
+# for unit in attack_units:
+#     if isinstance(unit, Marine):
+#         unit.stimpack()
+#     elif isinstance(unit, Tank):
+#         unit.set_seize_mode()
+#     elif isinstance(unit, Wraith):
+#         unit.clocking()
 
-# 전군 공격
-for unit in attack_units:
-    unit.attack("1시")
+# # 전군 공격
+# for unit in attack_units:
+#     unit.attack("1시")
 
-for unit in attack_units:
-    unit.damaged(randint(5,21))
+# for unit in attack_units:
+#     unit.damaged(randint(5,21))
 
-# 게임 종료
-game_over()
+# # 게임 종료
+# game_over()
+
+
+# try:
+#     print("나누기 전용 계산기입니다")
+#     nums = []
+#     nums.append(int(input("첫 번째 숫자를 입력하세요 :")))
+#     nums.append(int(input("두 번째 숫자를 입력하세요 :")))
+#     nums.append(int(nums[0]  / nums[1])))
+
+#     print("{0} / {1} = {2}".format(num1,num2,int(num1/num2)))
+# except ValueError:
+#     print("에러! 잘못된 값을 입력했습니다.")
+# except ZeroDivisionError as err:
+#     print(err)
+
+# class BigNumberError(Exception):
+#     def __init__(self, msg):
+#         self.msg = msg
+
+#     def __str__(self):
+#         return self.msg
+
+
+# try:
+#     print("한 자리 숫자 나누기 전용 계산기")
+#     num1 = int(input("첫 번째 숫자를 입력하세요"))
+#     num2 = int(input("두 번째 숫자를 입력하세요"))
+#     if num1 >= 10 or num2 >= 10:
+#         raise BigNumberError("입력 값 : {0}, {1}".format(num1, num2))
+#     print("{0} / {1} = {2}".format(num1, num2, int(num1 / num2)))
+# except ValueError:
+#     print("잘못된 값을 입력했습니다.")
+# except BigNumberError as err:
+#     print("에러가 발생했습니다. 한 자리 숫자만 입력하세요")
+#     print(err)
+# finally:
+#     print("계산기를 이용해주셔서 감사합니다.")
+
+##. 모듈(module)
+
+# import theater_module
+# theater_module.price(3)
+# theater_module.price_morning(4)
+# theater_module.price_soldier(3)
+
+# import theater_module as mv
+# mv.price(3)
+# mv.price_morning(3)
+# mv.price_soldier(3)
+
+# from theater_module import *
+# price(3)
+# price_morning(3)
+# price_soldier(3)
+
+# from theater_module import price, price_morning
+
+# price(3)
+# price_morning(3)
+# price_soldier(3)
+
+# from theater_module import price_soldier as price
+# price(5)
+
+
+# import travel.thailand
+# trip_to = travel.thailand.ThailandPackage()
+# trip_to.detail()
+
+# from travel import vietnam
+# trip_to = vietnam.VietnamPackage()
+# trip_to.detail()
+
+# from travel import *
+# # trip_to = vietnam.VietnamPackage()
+# trip_to = thailand.ThailandPackage()
+# trip_to.detail()
+
+# import inspect
+# import random
+# print(inspect.getfile(random))
+# print(inspect.getfile(thailand))
+
+# from bs4 import BeautifulSoup
+# soup = BeautifulSoup("<p>Some<b>bad<i>HTML")
+# print(soup.prettify())
+
+# dir : 어떤 객체를넘겨줬을 대 그 객체가 어떤 변수오 ㅏ함수를 갖고있는지 표시
+
+# glob : 경로 내의 폴더 / 파일 목록 조회
+
+# import glob
+# print(glob.glob("*.py"))    # 확장자가 .py인 모든 파일
+
+# import os
+# print(os.getcwd())
+
+import time
+print(time.localtime())
+print(time.strftime("%Y-%m-%d %H:%M:%S"))
+
+import datetime
+print("오늘 날짜는 ", datetime.date.today())
+
+today = datetime.date.today()
+td = datetime.timedelta(days=100)
+print("우리가 만난지 100일은", today+ td)
