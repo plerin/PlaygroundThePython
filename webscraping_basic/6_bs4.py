@@ -31,3 +31,4 @@ soup = BeautifulSoup(res.text, "lxml")
 
 webtoon = soup.find("a", text="튜토리얼 탑의 고인물-33화")
 print(webtoon)
+
