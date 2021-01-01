@@ -39,9 +39,14 @@ def send_email(content):
         smtp.login(EMAIL_ADDRESS, EMAIL_PASSWORD)
         smtp.send_message(msg)
 
-def scrape_ppomppu():
-    sti = ''
-    for i in range(1, 11):
+def scrape_ppomppu(max_page, list_keyword):
+    dic_content = {}
+    total_contents = ''
+
+    for keyword in list_keyword:
+        dic_content[keyword] = ''
+
+    for i in range(1, max_page):
         url = "http://www.ppomppu.co.kr/zboard/zboard.php?id=ppomppu&page={}&hotlist_flag=999&divpage=64".format(i)
         soup = create_soup(url)
         data_rows = soup.find("table", attrs={"id":"revolution_main_table"}).find_all("tr", {"class": ["list0","list1"]})
@@ -49,20 +54,37 @@ def scrape_ppomppu():
             close = row.find("img", attrs={"src":"/zboard/skin/DQ_Revolution_BBS_New1/end_icon.PNG"})
             if close:
                 continue
-            row_title = row.find("font", attrs={"class":"list_title"}).get_text()
+            row_title = row.find("font", attrs={"class":"list_title"}).get_text().replace(" ","").upper()
             row_link = "http://www.ppomppu.co.kr/zboard/" + row.find("a", attrs={"href":re.compile("^view.php")})["href"]
-            if "위메프" not in row_title:
-                continue
-            # print(row_title)
-            # print(row_link)
-            sti += row_title + '\r\n' + row_link + '\r\n'
-    return sti
+            for keyword in list_keyword:
+                if keyword in row_title:
+                    dic_content[keyword] += row_title + '|'
+                    dic_content[keyword] += row_link + '|'
+    for keyword in list_keyword:
+        total_contents += "="*20 + " " + keyword + " " + "="*20 + "\r\n"
+        
+        if dic_content[keyword] == '':
+            total_contents += '{}, no search result'.format(keyword) + '\r\n'
+        # '\r\n'.join하면 문자열이 개행되면서 합쳐진다.
+        total_contents += "\r\n".join(dic_content[keyword].split("|"))
 
-# content = scrape_ppomppu()
-# send_email(content)
+    return total_contents
 
 # 프로그램 직접 호출할 때만 사용되도록
 if __name__ == "__main__":
     # web_test()
-    content = scrape_ppomppu()
+    
+    brand = 'apple,Samsung,LG'
+    print(brand.upper())
+
+    try:
+        print("[alert by keyword | site : ppomppu]")
+        max_page = int(input("검색할 최대 페이지를 입력하세요 : " ))
+        keyword = input("키워드를 입력하세요(구분자 : ,) :")
+
+    except ValueError:
+        print("에러! 잘못된 값을 입력했습니다.")
+
+    list_keyword = keyword.replace(" ","").upper().split(",")
+    content = scrape_ppomppu(max_page, list_keyword)
     send_email(content)
