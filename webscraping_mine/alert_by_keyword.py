@@ -1,5 +1,11 @@
+import re
 import requests
 from bs4 import BeautifulSoup
+
+# 이메일 보내기 위함
+import smtplib
+from account import *
+from email.message import EmailMessage
 
 def create_soup(url):
     headers = {
@@ -18,24 +24,45 @@ def web_test():
     with open("web_test.html", "w", encoding="utf8") as f:
         f.write(soup.prettify())
 
+def send_email(content):
+    
+    msg = EmailMessage() # 객체생성
+    msg["Subject"] = "alert_by_keyworkd_뽐뿌_마스크." # 제목
+    msg["From"] = EMAIL_ADDRESS # 보내는 사람
+    msg["To"] = "zborisz@naver.com" # 받는 사람
+
+    msg.set_content(content) # 본문
+
+    with smtplib.SMTP("smtp.gmail.com", 587) as smtp:
+        smtp.ehlo()
+        smtp.starttls()
+        smtp.login(EMAIL_ADDRESS, EMAIL_PASSWORD)
+        smtp.send_message(msg)
 
 def scrape_ppomppu():
-    print("[ppomppu]")
-
+    sti = ''
     for i in range(1, 11):
         url = "http://www.ppomppu.co.kr/zboard/zboard.php?id=ppomppu&page={}&hotlist_flag=999&divpage=64".format(i)
         soup = create_soup(url)
-        # print(soup)
         data_rows = soup.find("table", attrs={"id":"revolution_main_table"}).find_all("tr", {"class": ["list0","list1"]})
-        # print(data_rows)
         for row in data_rows:
             close = row.find("img", attrs={"src":"/zboard/skin/DQ_Revolution_BBS_New1/end_icon.PNG"})
             if close:
                 continue
-            contents = row.find("font", attrs={"class":"list_title"}).get_text()
-            print(contents)
+            row_title = row.find("font", attrs={"class":"list_title"}).get_text()
+            row_link = "http://www.ppomppu.co.kr/zboard/" + row.find("a", attrs={"href":re.compile("^view.php")})["href"]
+            if "위메프" not in row_title:
+                continue
+            # print(row_title)
+            # print(row_link)
+            sti += row_title + '\r\n' + row_link + '\r\n'
+    return sti
+
+# content = scrape_ppomppu()
+# send_email(content)
 
 # 프로그램 직접 호출할 때만 사용되도록
 if __name__ == "__main__":
     # web_test()
-    scrape_ppomppu()
+    content = scrape_ppomppu()
+    send_email(content)
