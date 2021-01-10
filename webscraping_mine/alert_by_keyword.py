@@ -102,9 +102,6 @@ def scrape_ppomppu(max_page, list_keyword):
 # 프로그램 직접 호출할 때만 사용되도록
 if __name__ == "__main__":
     # web_test()
-    
-    brand = 'apple,Samsung,LG'
-    print(brand.upper())
 
     try:
         print("[alert by keyword | site : ppomppu]")

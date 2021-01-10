@@ -686,13 +686,20 @@ import pickle
 # import os
 # print(os.getcwd())
 
-import time
-print(time.localtime())
-print(time.strftime("%Y-%m-%d %H:%M:%S"))
+# import time
+# print(time.localtime())
+# print(time.strftime("%Y-%m-%d %H:%M:%S"))
 
-import datetime
-print("오늘 날짜는 ", datetime.date.today())
+# import datetime
+# print("오늘 날짜는 ", datetime.date.today())
 
-today = datetime.date.today()
-td = datetime.timedelta(days=100)
-print("우리가 만난지 100일은", today+ td)
+# today = datetime.date.today()
+# td = datetime.timedelta(days=100)
+# print("우리가 만난지 100일은", today+ td)
+
+# pip install --index-url https://test.pypi.org/simple/ --no-deps example-pkg-con2
+from example_pkg import op1
+
+# print(dir())
+# print(add(10, 20))    # operation 모듈의 add 함수 사용
+print(add(10, 20))

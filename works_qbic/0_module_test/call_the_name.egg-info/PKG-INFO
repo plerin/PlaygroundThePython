@@ -1,0 +1,11 @@
+Metadata-Version: 1.1
+Name: call-the-name
+Version: 0.1
+Summary: test for using module that multiple files 
+Home-page: https://github.com/no
+Author: stunstunstun
+Author-email: zborisz@naver.com
+License: MIT
+Description: long_description
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3.6

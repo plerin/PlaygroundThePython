@@ -1,0 +1,11 @@
+README.txt
+setup.py
+call_the_name.egg-info/PKG-INFO
+call_the_name.egg-info/SOURCES.txt
+call_the_name.egg-info/dependency_links.txt
+call_the_name.egg-info/not-zip-safe
+call_the_name.egg-info/top_level.txt
+calpkg/__init__.py
+calpkg/geometry.py
+calpkg/operation/__init__.py
+calpkg/operation/op1.py
