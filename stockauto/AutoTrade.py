@@ -6,7 +6,7 @@ from slacker import Slacker
 import time, calendar
 
 # 슬랙 메시지 보낼때 사용하는 라이브러리, 파라미터는 내 Auth 코드 작성
-slack = Slacker('xoxb-1593742025719-1601739413350-8WFihWQE3S7CDhXzBT5oOijT')
+slack = Slacker('xoxb-1593742025719-1601739413350-FofKAYbQOuY4e6Sbda4f329X')
 def dbgout(message):
     """인자로 받은 문자열을 파이썬 셸과 슬랙으로 동시에 출력한다."""
     print(datetime.now().strftime('[%m/%d %H:%M:%S]'), message)
@@ -247,11 +247,11 @@ def sell_all():
 if __name__ == '__main__': 
     try:
         # 자동매매 하고자 하는 종목 코드 작성 _ naver 증권 ETF 참조 _ https://finance.naver.com/sise/etf.nhn
-        # (1/11) KODEX200, KODEX 2차전지, TIGER 소프트웨어, KODEX 인버스, KBSTAR Fn수소경제테마
-        symbol_list = ['A069500', 'A305720' ,'A157490', 'A114800', 'A367770']
+        # (1/11) TIGER 200 레버리지, KODEX 2차전지, TIGER 소프트웨어, KODEX 인버스, KBSTAR Fn수소경제테마
+        symbol_list = ['A123320', 'A305720' ,'A157490', 'A367770'] # , 인버스 제외'A114800'
         bought_list = []     # 매수 완료된 종목 리스트
-        target_buy_count = 5 # 매수할 종목 수
-        buy_percent = 0.2 # 종목당 몇 %씩 살 건지 ex) 4종목이면 25% 작성하면 균등하게 100% 구매 
+        target_buy_count = 4 # 매수할 종목 수
+        buy_percent = 0.25 # 종목당 몇 %씩 살 건지 ex) 4종목이면 25% 작성하면 균등하게 100% 구매 
         printlog('check_creon_system() :', check_creon_system())  # 크레온 접속 점검
         stocks = get_stock_balance('ALL')      # 보유한 모든 종목 조회
         total_cash = int(get_current_cash())   # 100% 증거금 주문 가능 금액 조회
